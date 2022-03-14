@@ -5,8 +5,6 @@ import Layout from "../../components/Layout";
 import useRequest from "../../hooks/useRequest";
 
 const Ticket = ({ currentUser, ticket }) => {
-  console.log(ticket);
-  console.log(currentUser);
   const { doRequest, errors } = useRequest({
     url: "/api/orders",
     method: "post",

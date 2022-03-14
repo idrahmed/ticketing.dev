@@ -60,8 +60,6 @@ it("emits an OrderCancelled event", async () => {
     (natsWrapper.client.publish as jest.Mock).mock.calls[0][1]
   );
 
-  console.log(eventData);
-
   expect(eventData.id).toEqual(order.id);
 });
 

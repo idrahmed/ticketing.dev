@@ -30,7 +30,6 @@ const Order = ({ currentUser, order }) => {
   useEffect(() => {
     const findTimeLeft = () => {
       const msLeft = new Date(order.expiresAt) - new Date();
-      console.log("expiresAt: ", order.expiresAt);
       setTimeLeft(msLeft);
 
       // if time remaining is less than 0 we want to clear the interval i.e. ticket is expired
