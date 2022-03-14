@@ -14,7 +14,7 @@ const buildTicket = async () => {
   return ticket;
 };
 
-it('fetches orders for an particular user', async () => {
+it('fetches orders for a particular user', async () => {
   // Create three tickets
   const ticketOne = await buildTicket();
   const ticketTwo = await buildTicket();
@@ -48,9 +48,9 @@ it('fetches orders for an particular user', async () => {
     .expect(200);
 
   // Make sure we only got the orders for User #2
-  expect(response.body.length).toEqual(2);
-  expect(response.body[0].id).toEqual(orderOne.id);
-  expect(response.body[1].id).toEqual(orderTwo.id);
-  expect(response.body[0].ticket.id).toEqual(ticketTwo.id);
-  expect(response.body[1].ticket.id).toEqual(ticketThree.id);
+  expect(response.body.currentOrders.length).toEqual(2)
+  expect(response.body.currentOrders[0].id).toEqual(orderOne.id);
+  expect(response.body.currentOrders[1].id).toEqual(orderTwo.id);
+  expect(response.body.currentOrders[0].ticket.id).toEqual(ticketTwo.id);
+  expect(response.body.currentOrders[1].ticket.id).toEqual(ticketThree.id);
 });
