@@ -21,7 +21,6 @@ const signup = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log("submit");
     await doRequest();
   };
 
