@@ -2,8 +2,10 @@ name: tests-auth
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on pull request events
-  pull_request
+  # Triggers the workflow on pull request events only for the auth path. 
+  pull_request:
+    paths: 
+      - 'auth/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
