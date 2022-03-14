@@ -1,0 +1,104 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+# all the config files (k8s) we want to load into our cluster
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  # dont push to dockerhub
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: ticketing-dev-341604
+  artifacts:
+    # google cloud will now create this image
+    - image: gcr.io/ticketing-dev-341604/auth
+      # directory
+      context: auth
+      # its docker file
+      docker:
+        dockerfile: Dockerfile
+      # how to handle changes in files
+      sync:
+        manual:
+          # any changes on this path locally
+          - src: "src/**/*.ts"
+            # copy it to this destination (throw it directly into the pod)
+            dest: .
+        # any changes made to other files outside the src path, skaffold will rebuild the image
+        # google cloud will now create this image
+    - image: gcr.io/ticketing-dev-341604/client
+      # directory
+      context: client
+      # its docker file
+      docker:
+        dockerfile: Dockerfile
+      # how to handle changes in files
+      sync:
+        manual:
+          # any changes on this path locally
+          - src: "**/*.js"
+            # copy it to this destination (throw it directly into the pod)
+            dest: .
+        # any changes made to other files outside the src path, skaffold will rebuild the image
+    - image: gcr.io/ticketing-dev-341604/tickets
+      # directory
+      context: tickets
+      # its docker file
+      docker:
+        dockerfile: Dockerfile
+      # how to handle changes in files
+      sync:
+        manual:
+          # any changes on this path locally
+          - src: "src/**/*.ts"
+            # copy it to this destination (throw it directly into the pod)
+            dest: .
+        # any changes made to other files outside the src path, skaffold will rebuild the image
+        # google cloud will now create this image
+    - image: gcr.io/ticketing-dev-341604/orders
+      # directory
+      context: orders
+      # its docker file
+      docker:
+        dockerfile: Dockerfile
+      # how to handle changes in files
+      sync:
+        manual:
+          # any changes on this path locally
+          - src: "src/**/*.ts"
+            # copy it to this destination (throw it directly into the pod)
+            dest: .
+        # any changes made to other files outside the src path, skaffold will rebuild the image
+        # google cloud will now create this image
+    - image: gcr.io/ticketing-dev-341604/expiration
+      # directory
+      context: expiration
+      # its docker file
+      docker:
+        dockerfile: Dockerfile
+      # how to handle changes in files
+      sync:
+        manual:
+          # any changes on this path locally
+          - src: "src/**/*.ts"
+            # copy it to this destination (throw it directly into the pod)
+            dest: .
+        # any changes made to other files outside the src path, skaffold will rebuild the image
+        # google cloud will now create this image
+    - image: gcr.io/ticketing-dev-341604/payments
+      # directory
+      context: payments
+      # its docker file
+      docker:
+        dockerfile: Dockerfile
+      # how to handle changes in files
+      sync:
+        manual:
+          # any changes on this path locally
+          - src: "src/**/*.ts"
+            # copy it to this destination (throw it directly into the pod)
+            dest: .
+        # any changes made to other files outside the src path, skaffold will rebuild the image
+        # google cloud will now create this image
