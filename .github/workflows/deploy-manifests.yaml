@@ -1,0 +1,20 @@
+name: deploy-manifests
+
+on:
+  push:
+    branches: 
+      - master
+    paths:
+      - 'infra/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install vultr-cli
+        uses: techknowlogick/action-vultr@v2
+        with:
+          token: ${{ secrets.VULTR_API_KEY }}
+      - run: vultr-cli k config f1f12d79-0e76-413a-90f5-aa48df4e6136
+      - run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod
