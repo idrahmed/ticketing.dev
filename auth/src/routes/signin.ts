@@ -23,7 +23,7 @@ router.post(
       throw new BadRequestError('Invalid credentials')
     }
 
-    // checking if entered password matches the one in our db.
+    // checking if entered password matches the one in db.
     const passwordsMatch = await Password.compare(existingUser.password, password)
 
     if (!passwordsMatch) {
