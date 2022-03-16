@@ -1,0 +1,36 @@
+# Deployment config that will run whenever we make a pull and merge request in payments. 
+
+name: deploy-payments
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch and payments directory
+   push:
+    branches: 
+      - master
+    paths:
+      - 'payments/**'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create kubeconfig
+        run: |
+          mkdir ${HOME}/.kube
+          echo $KUBE_CONFIG | base64 -di > ${HOME}/.kube/config
+          cat ${HOME}/.kube/config
+        env: 
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      - name: Use context
+        run: kubectl config use-context vke-f1f12d79-0e76-413a-90f5-aa48df4e6136
+      # we want to build a new image and push it to docker hub. 
+      - run: cd payments && docker build -t idrahmed/payments .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker push idrahmed/payments
