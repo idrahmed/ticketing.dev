@@ -17,7 +17,7 @@ router.post(
   async (req: Request, res: Response) => {
     const {email, password} = req.body
 
-    // checking if email already exists in db
+    // checking if email already exists in db.
     const existingUser = await User.findOne({email})
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials')
