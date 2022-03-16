@@ -17,13 +17,13 @@ router.post(
   async (req: Request, res: Response) => {
     const {email, password} = req.body
 
-    // checking if email already exists in db.
+    // checking if email already exists in db
     const existingUser = await User.findOne({email})
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials')
     }
 
-    // checking if entered password matches the one in db.
+    // checking if entered password matches the one in db
     const passwordsMatch = await Password.compare(existingUser.password, password)
 
     if (!passwordsMatch) {
