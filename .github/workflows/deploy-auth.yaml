@@ -24,10 +24,6 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - run: docker push idrahmed/auth
-      - name: Install vultr-cli
-        uses: techknowlogick/action-vultr@v2
-        with:
-          token: ${{ secrets.VULTR_API_KEY }}
       - uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
