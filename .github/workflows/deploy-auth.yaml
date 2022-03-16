@@ -20,12 +20,13 @@ jobs:
         uses: actions/checkout@v2
 
       - run: mkdir ${HOME}/.kube
-      - run: echo $KUBE_CONFIG > ${HOME}/.kube/config-encoded
+      - name: kubeconfig
+        run: |
+          echo $KUBE_CONFIG > ${HOME}/.kube/config-encoded 
+          cat ${HOME}/.kube/config-encoded | base64 --decode 
         env: 
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-      - run: cat ${HOME}/.kube/config-encoded | base64 --decode > ${HOME}/.kube/config
-      - run: cat ${HOME}/.kube/config 
-        
+     
       - name: Use context
         run: kubectl config use-context vke-f1f12d79-0e76-413a-90f5-aa48df4e6136
       # we want to build a new image and push it to docker hub. 
