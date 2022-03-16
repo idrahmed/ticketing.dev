@@ -28,7 +28,7 @@ router.post(
 
     const user = User.build({ email, password });
 
-    // this saves the user to the db
+    // this saves the user in the db
     await user.save();
 
     // generate JWT
