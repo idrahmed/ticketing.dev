@@ -28,6 +28,10 @@ jobs:
         uses: techknowlogick/action-vultr@v2
         with:
           token: ${{ secrets.VULTR_API_KEY }}
-      - run: vultr-cli k config f1f12d79-0e76-413a-90f5-aa48df4e6136
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: get pods
       - run: kubectl rollout restart deployment auth-depl
       
