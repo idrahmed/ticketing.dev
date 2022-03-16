@@ -2,10 +2,10 @@ name: deploy-manifests
 
 on:
   push:
-    branches: 
+    branches:
       - master
     paths:
-      - 'infra/**'
+      - "infra/**"
 
 jobs:
   build:
@@ -13,15 +13,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Kuberentes (k8s) cli - kubectl
-        uses: actions-hub/kubectl@v1.21.2
-
-      - name: Create kubeconfig 
+      - name: Create kubeconfig
         run: |
           mkdir ${HOME}/.kube
-          echo $KUBE_CONFIG | base64 --decode > ${HOME}/.kube/config
+          echo $KUBE_CONFIG | base64 -di > ${HOME}/.kube/config
           cat ${HOME}/.kube/config
-        env: 
+        env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
       - name: Use context
         run: kubectl config use-context vke-f1f12d79-0e76-413a-90f5-aa48df4e6136

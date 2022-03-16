@@ -12,7 +12,7 @@ spec:
     # made up domain name
     - host: ticketing.dev
       http:
-        # paths to our services 
+        # paths to our different services 
         paths:
           - path: /api/users/?(.*)
             pathType: Prefix
