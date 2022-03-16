@@ -4,7 +4,9 @@ kind: Config
 deploy:
   kubectl:
     manifests:
+    # location of config files
       - ./infra/k8s/*
+      - ./infra/k8s-dev/*
 build:
   # dont push to dockerhub
   # local:
