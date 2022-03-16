@@ -17,6 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Create kubeconfig 
+        run: |
+          mkdir ${HOME}/.kube
+          echo ${{ secrets.KUBE_CONFIG }} | base64 --decode > ${HOME}/.kube/config
+          cat ${HOME}/.kube/config
+      - name: Use context
+        run: kubectl config use-context vke-f1f12d79-0e76-413a-90f5-aa48df4e6136
       # we want to build a new image and push it to docker hub. 
       - run: cd auth && docker build -t idrahmed/auth .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
@@ -24,10 +31,5 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - run: docker push idrahmed/auth
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        with:
-          args: get pods
       - run: kubectl rollout restart deployment auth-depl
       
