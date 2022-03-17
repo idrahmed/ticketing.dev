@@ -33,8 +33,6 @@ const index = ({ currentUser, tickets }) => {
 };
 
 export async function getServerSideProps(context) {
-  // 'http://SERVICENAME.NAMESPACE.svc.clutser.local'
-
   const { data } = await ingressInstance(context).get("/api/users/currentuser");
   const { data: tickets } = await ingressInstance(context).get("/api/tickets");
   return {
