@@ -21,5 +21,5 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
       - name: Use context
-        run: kubectl config use-context vke-f1f12d79-0e76-413a-90f5-aa48df4e6136
+        run: kubectl config use-context vke-d79bf1a3-bb11-429a-a9c4-14e030731996
       - run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod
