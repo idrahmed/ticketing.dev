@@ -10,7 +10,7 @@ metadata:
 spec:
   rules:
     # made up domain name
-    - host: ticketing-prod.me
+    - host: www.ticketing-prod.me
       http:
         # paths to our different services 
         paths:
