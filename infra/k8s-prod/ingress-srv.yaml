@@ -9,6 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
+      # domain name
     - host: www.ticketing-prod.me
       http:
         # paths to our different services 
