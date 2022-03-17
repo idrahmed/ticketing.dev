@@ -1,5 +1,3 @@
-import ingressInstance from "../api/ingressInstance";
-
 export function requireAuthentication(gssp) {
   return async (ctx) => {
     const { req, res } = ctx;
