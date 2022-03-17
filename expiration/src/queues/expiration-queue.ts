@@ -14,7 +14,7 @@ const expirationQueue = new Queue<Payload>("order:expiration", {
 });
 
 // processing the job
-// we are publishing the orderId of the order that has entered the expiration queue.
+// we are publishing the orderId of the order that has just entered the expiration queue.
 // we will listen to this channel inside the orders service. 
 expirationQueue.process(async (job) => {
   new ExpirationCompletePublisher(natsWrapper.client).publish({
