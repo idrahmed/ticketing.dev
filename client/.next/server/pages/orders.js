@@ -42,7 +42,7 @@ function requireAuthentication(gssp) {
 
 const ingressInstance = ({ req  })=>{
     return axios__WEBPACK_IMPORTED_MODULE_0___default().create({
-        baseURL: "http://ticketing-prod.me",
+        baseURL: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
         headers: req.headers
     });
 };

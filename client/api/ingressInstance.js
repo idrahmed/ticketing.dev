@@ -2,7 +2,7 @@ import axios from "axios";
 
 const ingressInstance = ({ req }) => {
   return axios.create({
-    baseURL: "http://ticketing-prod.me",
+    baseURL: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
     headers: req.headers,
   });
 };
