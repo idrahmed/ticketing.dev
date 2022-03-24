@@ -43,6 +43,8 @@ build:
           - src: "**/*.js"
             # copy it to this destination (throw it directly into the pod)
             dest: .
+          - src: '**/*.scss'
+            dest: .
         # any changes made to other files outside the src path, skaffold will rebuild the image
     - image: gcr.io/ticketing-dev-341604/tickets
       # directory

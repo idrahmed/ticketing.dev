@@ -9,14 +9,17 @@ it("returns a 404 if the ticket is not found", async () => {
 });
 
 it("returns the ticket if the ticket is found", async () => {
-  const title = "india vs pakistan melbourne 2022";
+  const title = "sdsds";
   const price = 120;
+  const desc = 'dsfsdfsd'
+
   const response = await request(app)
     .post("/api/tickets")
     .set("Cookie", global.signin())
     .send({
       title,
       price,
+      desc
     })
     .expect(201);
 

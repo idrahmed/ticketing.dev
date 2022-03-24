@@ -1,33 +1,17 @@
-import { Table } from "react-bootstrap";
 import ingressInstance from "../api/ingressInstance";
 import Layout from "../components/Layout";
-import Link from "next/link";
+import Card from "../components/Card";
+import styles from "../styles/Home.module.scss";
 
 const index = ({ currentUser, tickets }) => {
-  const ticketList = tickets.map((ticket) => (
-    <Link
-      href="/tickets/[ticketId]"
-      as={`/tickets/${ticket.id}`}
-      key={ticket.id}
-    >
-      <tr>
-        <td>{ticket.title}</td>
-        <td>${ticket.price}</td>
-      </tr>
-    </Link>
-  ));
   return (
     <Layout currentUser={currentUser}>
       <h1 className="mb-4">Tickets</h1>
-      <Table striped bordered hover variant="light">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>{ticketList}</tbody>
-      </Table>
+      <div className={styles.layout}>
+        {tickets.map((ticket) => (
+          <Card ticket={ticket} />
+        ))}
+      </div>
     </Layout>
   );
 };

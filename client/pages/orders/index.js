@@ -59,6 +59,8 @@ const OrderIndex = ({ currentUser, orders }) => {
 export const getServerSideProps = requireAuthentication(async (ctx) => {
   const { data } = await ingressInstance(ctx).get("/api/users/currentuser");
   const { data: orders } = await ingressInstance(ctx).get("/api/orders");
+  console.log("data: ", data);
+  console.log("orders: ", orders);
   return {
     props: {
       currentUser: data.currentUser,

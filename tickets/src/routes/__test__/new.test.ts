@@ -68,7 +68,8 @@ it("creates a ticket with valid inputs", async () => {
     .set('Cookie', global.signin())
     .send({
       title: "sdfsdf",
-      price: 20
+      price: 20, 
+      desc: 'concert at venue'
     })
     .expect(201)
     tickets = await Ticket.find({})
@@ -83,7 +84,8 @@ it('publishes an event', async () => {
     .set('Cookie', global.signin())
     .send({
       title: "sdfsdf",
-      price: 20
+      price: 20,
+      desc: 'concert at venue'
     })
     .expect(201)
 

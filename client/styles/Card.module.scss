@@ -1,0 +1,43 @@
+.card {  
+  width: 380px;
+  height: 200px;
+  flex-direction: column;
+  margin: 0 1.5rem 2rem 0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #ece9f8;
+
+  cursor: pointer;
+  transition: all 0.3 ease;
+
+  &:hover {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  }
+
+  @media screen and (max-width: 300px) {
+    width: 100%;
+  }
+}
+
+.info {
+  height: 100%;
+
+  h4 {
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  p {
+    color: rgb(75, 73, 73);
+    font-size: 1rem;
+    padding-top: 0.2rem;
+    display: -webkit-box;
+    height: 58%;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

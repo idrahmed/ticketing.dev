@@ -5,6 +5,7 @@ import Layout from "../../components/Layout";
 import useRequest from "../../hooks/useRequest";
 
 const Ticket = ({ currentUser, ticket }) => {
+  console.log("ticket: ", ticket);
   const { doRequest, errors } = useRequest({
     url: "/api/orders",
     method: "post",
@@ -17,14 +18,21 @@ const Ticket = ({ currentUser, ticket }) => {
   return (
     <Layout currentUser={currentUser}>
       <h1 className="mb-4">{ticket.title}</h1>
-      <h4 className="mb-4">Price: ${ticket.price}</h4>
+      <h4 className="mb-4" style={{ fontWeight: 400 }}>
+        {ticket.desc}
+      </h4>
+      <h4 className="mb-4" style={{ fontWeight: 400 }}>
+        Price: ${ticket.price}
+      </h4>
       {errors}
       {ticket.orderId ? (
         <Button variant="danger" disabled>
           This ticket is currently reserved or has been purchased
         </Button>
       ) : ticket.userId === currentUser?.id ? (
-        <Button>Edit your ticket</Button>
+        <Button onClick={() => Router.push(`/tickets/edit/${ticket.id}`)}>
+          Edit your ticket
+        </Button>
       ) : (
         <Button onClick={() => doRequest()}>Purchase ticket</Button>
       )}
@@ -38,6 +46,7 @@ export async function getServerSideProps(context) {
   const { data: ticket } = await ingressInstance(context).get(
     `/api/tickets/${ticketId}`
   );
+
   return {
     props: {
       currentUser: data.currentUser,

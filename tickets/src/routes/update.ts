@@ -21,6 +21,7 @@ router.put(
     body("price")
       .isFloat({ min: 1 })
       .withMessage("price must be greater than 0"),
+      body("desc").notEmpty().withMessage("Description is required")
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -45,6 +46,7 @@ router.put(
     ticket.set({
       title: req.body.title,
       price: req.body.price,
+      desc: req.body.desc
     });
 
     await ticket.save();
@@ -53,6 +55,7 @@ router.put(
       id: ticket.id,
       title: ticket.title,
       price: ticket.price,
+      desc: ticket.desc,
       version: ticket.version
     });
     res.send(ticket);

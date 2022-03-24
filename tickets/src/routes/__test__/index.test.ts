@@ -5,6 +5,7 @@ const createTicket = () => {
   return request(app).post("/api/tickets").set("Cookie", global.signin()).send({
     title: "ticket1",
     price: 200,
+    desc: "concert at venue",
   });
 };
 
@@ -13,10 +14,7 @@ it("can fetch a list of tickets", async () => {
   await createTicket();
   await createTicket();
 
-  const response = await request(app)
-  .get('/api/tickets')
-  .send()
-  .expect(200)
+  const response = await request(app).get("/api/tickets").send().expect(200);
 
-  expect(response.body.length).toEqual(3)
+  expect(response.body.length).toEqual(3);
 });

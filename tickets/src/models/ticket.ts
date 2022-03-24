@@ -6,6 +6,7 @@ interface TicketAttrs {
   title: string;
   price: number;
   userId: string;
+  desc: string;
 }
 
 // shape of a ticket instance/document in db
@@ -15,6 +16,7 @@ interface TicketDoc extends mongoose.Document {
   userId: string;
   version: number;
   orderId?: string;
+  desc: string
 }
 
 // properties to construct the ticket
@@ -40,6 +42,9 @@ const ticketSchema = new mongoose.Schema(
     orderId: {
       type: String,
     },
+    desc: {
+      type: String
+    }
   },
   {
     // remapping the json obj that mongo sends back. We don't want to return back we want _id to be id
