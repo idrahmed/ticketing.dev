@@ -11,6 +11,7 @@ it("cancels the order", async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "game",
     price: 200,
+    desc: 'sdfsfd'
   });
   await ticket.save();
   // make a request to create an order
@@ -38,6 +39,7 @@ it('emits a cancel order event', async () => {
     id: new mongoose.Types.ObjectId().toHexString(),
     title: "game",
     price: 200,
+    desc: 'sdfsfd'
   });
   await ticket.save();
   // make a request to create an order

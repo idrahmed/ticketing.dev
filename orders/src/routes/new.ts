@@ -33,9 +33,12 @@ router.post(
   validateRequest,
   async (req: Request, res: Response) => {
     const { ticketId } = req.body;
+    console.log('ticketId: ', ticketId)
     // find the ticket the user is trying to order in the db
     const ticket = await Ticket.findById(ticketId);
+    console.log('ticket: ', ticket)
     if (!ticket) {
+      console.log('no ticket')
       throw new NotFoundError();
     }
 
@@ -67,7 +70,8 @@ router.post(
       expiresAt: order.expiresAt.toISOString(), 
       ticket: {
         id: ticket.id,
-        price: ticket.price
+        price: ticket.price,
+        desc: ticket.desc
       }
     })
 

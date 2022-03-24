@@ -24,10 +24,11 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
     }
 
     // update the ticket
-    const { title, price } = data;
+    const { title, price, desc } = data;
     ticket.set({
       title,
       price,
+      desc
     });
 
     // save the ticket

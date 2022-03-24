@@ -11,11 +11,13 @@ export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
     queueGroupName = queueGroupName
     // replicating newly created ticket.
     async onMessage(data: TicketCreatedEvent['data'], msg: Message) {   
-        const { title, price, id } = data
+        const { title, price, id, desc } = data
         const ticket = Ticket.build({
-            id, title, price
+            id, title, price, desc
         })
-        await ticket.save()
+        const saveTicket = await ticket.save()
+        console.log('ticket: ', ticket)
+        console.log('saveTicket: ', saveTicket)
         // acknowledge that we have successfully built and saved our ticket. 
         msg.ack()
     }

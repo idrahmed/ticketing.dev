@@ -7,8 +7,9 @@ it("returns an unauthorised error if user tries to fetch another users order", a
   // create a ticket
   const ticket = Ticket.build({
     id: new mongoose.Types.ObjectId().toHexString(),
-    title: "concert",
-    price: 20,
+    title: "game",
+    price: 200,
+    desc: 'sdfsfd'
   });
   await ticket.save();
   // make a req to build an order with this ticket
@@ -32,8 +33,9 @@ it("fetches the order", async () => {
   // create a ticket
   const ticket = Ticket.build({
     id: new mongoose.Types.ObjectId().toHexString(),
-    title: "concert",
-    price: 20,
+    title: "game",
+    price: 200,
+    desc: 'sdfsfd'
   });
   await ticket.save();
   // make a req to build an order with this ticket
